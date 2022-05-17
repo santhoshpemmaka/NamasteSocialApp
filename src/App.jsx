@@ -1,8 +1,13 @@
-import "./App.css";
+import "./App.scss";
+import {Routes, Route} from "react-router-dom";
+import {HomeLandingpage} from "./Components";
+
 function App() {
 	return (
 		<div className='App'>
-			<h1>NeoG Level One Exericses</h1>
+			<Routes>
+				<Route path='/' element={<HomeLandingpage />} />
+			</Routes>
 		</div>
 	);
 }
