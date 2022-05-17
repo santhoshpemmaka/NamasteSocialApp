@@ -10,7 +10,6 @@ makeServer();
 ReactDOM.render(
 	<React.StrictMode>
 		<Router>
-			{/* <Mock /> */}
 			<App />
 		</Router>
 	</React.StrictMode>,
