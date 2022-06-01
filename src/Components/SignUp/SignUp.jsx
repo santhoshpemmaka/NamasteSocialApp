@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate, useLocation} from "react-router-dom";
 import "./SignUp.scss";
-import {signUpUser} from "../../Features/Auth";
+import {signUpUser} from "../../Features/Auth/Auth";
 
 const SignUp = () => {
 	const userDetail = useSelector((store) => store.auth);
@@ -20,8 +20,8 @@ const SignUp = () => {
 	});
 	if (userDetail.token) {
 		setTimeout(() => {
-			navigation(location?.state?.from?.pathname || "/", {replace: true});
-		}, 1000);
+			navigation(location?.state?.from?.pathname || "/home", {replace: true});
+		}, 2000);
 	}
 
 	const signupHandler = () => {

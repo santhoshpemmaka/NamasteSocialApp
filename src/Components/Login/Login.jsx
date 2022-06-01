@@ -3,7 +3,7 @@ import axios from "axios";
 import {Link, useNavigate, useLocation} from "react-router-dom";
 import "./Login.scss";
 import {useDispatch, useSelector} from "react-redux";
-import {loginUser} from "../../Features/Auth";
+import {loginUser} from "../../Features/Auth/Auth";
 
 const Login = () => {
 	const userDetails = useSelector((store) => store.auth);
@@ -17,8 +17,8 @@ const Login = () => {
 	});
 	if (userDetails.token) {
 		setTimeout(() => {
-			navigation("/", {replace: true});
-		}, 1000);
+			navigation(location?.state?.from?.pathname || "/home", {replace: true});
+		}, 2000);
 	}
 
 	useEffect(() => {
