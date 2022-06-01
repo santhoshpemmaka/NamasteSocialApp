@@ -40,12 +40,12 @@
 					font-size: 2rem;
 					color: var(--primary-color);
 				}
-                .home-page-subheading3{
-                    font-size: 2rem;
-                    color: var(--secondary-text-color);
-                    font-weight: 500;
-                    padding-top: 1rem;
-                }
+				.home-page-subheading3 {
+					font-size: 2rem;
+					color: var(--secondary-text-color);
+					font-weight: 500;
+					padding-top: 1rem;
+				}
 			}
 			.home-page-description {
 				line-height: 3rem;
@@ -89,5 +89,19 @@
 		display: grid;
 		grid-template-columns: 50% 50%;
 		gap: 2rem;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.home-container {
+		position: static;
+		.home-component {
+			padding: 0;
+		}
+
+		.grid-layout {
+			grid-template-columns: 1fr;
+			display: grid;
+		}
 	}
 }
