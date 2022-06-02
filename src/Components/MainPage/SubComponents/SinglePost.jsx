@@ -80,7 +80,6 @@ const SinglePost = ({post}) => {
 	};
 
 	const saveHandler = () => {
-		console.log("edittext", editContext);
 		editHandler();
 		ellipsisHandler();
 		dispatch(

@@ -13,7 +13,6 @@ const MainPage = () => {
 		dispatch(adduserPost({content: inputText}));
 		setinputText("");
 	};
-	console.log(allPosts);
 	return (
 		<div className='mainpage-container'>
 			<label className='mainpage-heading'>Namaste</label>
