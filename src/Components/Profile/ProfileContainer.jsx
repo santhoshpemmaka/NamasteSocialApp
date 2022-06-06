@@ -25,16 +25,16 @@ const ProfileContainer = () => {
 					<i className='fas fa-home'></i>
 				</Link>
 				<Link to='/explore' className='mobile-page-icon'>
-					<i class='fas fa-compass'></i>
+					<i className='fas fa-compass'></i>
 				</Link>
 				<Link to='/bookmark' className='mobile-page-icon'>
-					<i class='fas fa-bookmark'></i>
+					<i className='fas fa-bookmark'></i>
 				</Link>
 				<Link to='/profile' className='mobile-page-icon'>
-					<i class='fas fa-user-circle'></i>
+					<i className='fas fa-user-circle'></i>
 				</Link>
 				<label className='mobile-page-icon' onClick={() => logoutHandler()}>
-					<i class='fas fa-sign-out-alt'></i>
+					<i className='fas fa-sign-out-alt'></i>
 				</label>
 			</div>
 		</div>
