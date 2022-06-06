@@ -22,3 +22,5 @@ Functionalities-
 
 React- Reducer + Redux Toolkit, Router and mockbee API
 
+
+https://namaste-app.netlify.app/
