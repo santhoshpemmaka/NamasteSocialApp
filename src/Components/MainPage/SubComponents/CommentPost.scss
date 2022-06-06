@@ -1,0 +1,40 @@
+.user-comment-container {
+	display: flex;
+	padding: 1rem 1.5rem;
+	margin: 1rem 0;
+	.user-comment-image {
+		width: 5rem;
+		height: 5rem;
+	}
+	.user-comment-info {
+		display: flex;
+		flex-grow: 1;
+		flex-direction: column;
+		padding: 1rem 2rem;
+		background-color: var(--border-color);
+		border-radius: 1rem;
+		margin: 0 1rem;
+		.user-comment-name {
+			color: var(--primary-text-color);
+			font-size: 1.6rem;
+			padding-bottom: 0.5rem;
+		}
+		.user-comment-text {
+			font-size: 1.5rem;
+			color: var(--secondary-text-color);
+		}
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.user-comment-container {
+		padding: 1rem;
+		.user-comment-image {
+			width: 4rem;
+			height: 4rem;
+		}
+		.user-comment-info {
+			padding: 1rem;
+		}
+	}
+}
