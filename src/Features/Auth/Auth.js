@@ -1,19 +1,22 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import {act} from "react-dom/test-utils";
-import {loginUserRequest, signUpRequest} from "../utils/server-request";
+import {
+	loginUserRequest,
+	signUpRequest,
+	updateUserServer,
+} from "../../utils/server-request";
 const {
-	userName: userNameDetails,
+	user: userNameDetails,
 	token: tokenDetails,
 	email,
-} = JSON.parse(localStorage?.getItem("userSession")) || {
-	userName: "",
+} = JSON.parse(localStorage?.getItem("social-userSession")) || {
+	user: "",
 	token: "",
 	email: "",
 };
 
 const initialState = {
 	token: tokenDetails,
-	userName: userNameDetails,
+	user: userNameDetails,
 	email: email,
 	lastName: "",
 	authStatus: "",
@@ -24,7 +27,7 @@ export const loginUser = createAsyncThunk(
 	"social-app-auth/loginUser",
 	async (login, thunkAPI) => {
 		try {
-			const response = await loginUserRequest(login.userName, login.password);
+			const response = await loginUserRequest(login.username, login.password);
 			return response.data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error);
@@ -49,10 +52,29 @@ export const signUpUser = createAsyncThunk(
 	}
 );
 
+export const updateUser = createAsyncThunk(
+	"/social-app-auth/updateUser",
+	async (userData, thunkAPI) => {
+		try {
+			const userInfo = JSON.parse(localStorage.getItem("social-userSession"));
+			const response = await updateUserServer(userInfo.token, userData);
+			return response.data;
+		} catch (error) {
+			thunkAPI.rejectWithValue(error);
+		}
+	}
+);
+
 const authSlice = createSlice({
 	name: "social-app-auth",
 	initialState,
-	reducers: {},
+	reducers: {
+		logoutUser: (state) => {
+			localStorage?.removeItem("social-userSession");
+			state.token = "";
+			state.user = "";
+		},
+	},
 	extraReducers: {
 		[loginUser.pending]: (state) => {
 			state.authStatus = "pending";
@@ -60,12 +82,12 @@ const authSlice = createSlice({
 		[loginUser.fulfilled]: (state, action) => {
 			state.authStatus = "fulfilled";
 			state.token = action.payload.encodedToken;
-			state.userName = action.payload.foundUser.firstName;
+			state.user = action.payload.foundUser;
 			state.email = action.payload.foundUser.email;
 			localStorage.setItem(
-				"userSession",
+				"social-userSession",
 				JSON.stringify({
-					userName: state.userName,
+					user: state.user,
 					token: state.token,
 					email: state.email,
 				})
@@ -81,12 +103,12 @@ const authSlice = createSlice({
 		[signUpUser.fulfilled]: (state, action) => {
 			state.authStatus = "fulfilled";
 			state.token = action.payload.encodedToken;
-			state.userName = action.payload.createdUser.firstName;
+			state.user = action.payload.createdUser;
 			state.email = action.payload.createdUser.userName;
 			localStorage.setItem(
-				"userSesssion",
+				"socail-userSesssion",
 				JSON.stringify({
-					userName: state.userName,
+					user: state.user,
 					token: state.token,
 					email: state.email,
 				})
@@ -96,7 +118,19 @@ const authSlice = createSlice({
 			state.authStatus = "Error";
 			state.error = action.payload;
 		},
+		[updateUser.pending]: (state) => {
+			state.authStatus = "Pending";
+		},
+		[updateUser.fulfilled]: (state, action) => {
+			state.authStatus = "fulfilled";
+			state.user = action.payload.user;
+		},
+		[updateUser.rejected]: (state) => {
+			state.authStatus = "Error";
+		},
 	},
 });
+
+export const {logoutUser} = authSlice.actions;
 
 export default authSlice.reducer;
