@@ -9,7 +9,7 @@ Tech-
 Functionalities-
 
 - Compose Post, Posts feed, Like Post
-- Bookmark Post, delete Post
+- Bookmark Post, Delete Post
 - Search User
 - Follow and unfollow User
 - Edit  and update the user profile
