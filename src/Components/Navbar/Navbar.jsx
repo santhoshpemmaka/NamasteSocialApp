@@ -57,7 +57,6 @@ const Navbar = () => {
 					<label>LOGOUT</label>
 				</label>
 			</div>
-			<button className='navbar-button'>Post</button>
 		</div>
 	);
 };

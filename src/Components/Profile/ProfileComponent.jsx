@@ -30,7 +30,7 @@ const ProfileComponent = () => {
 		dispatch(updateUser(userFrom));
 		editHandler();
 	};
-
+	console.log(userFrom);
 	return (
 		<div className='profile-component'>
 			<label className='profile-page-heading'>Namaste</label>
@@ -60,12 +60,12 @@ const ProfileComponent = () => {
 										<img src={user.profilePic} />
 									</div>
 									<div className='profile-edit-lastname'>
-										<h3>LastName</h3>
+										<h3>FirstName</h3>
 										<input
 											type='text'
-											value={userFrom?.lastName}
+											value={userFrom?.firstName}
 											onChange={(e) =>
-												setuserFrom({...userFrom, lastName: e.target.value})
+												setuserFrom({...userFrom, firstName: e.target.value})
 											}
 										/>
 									</div>

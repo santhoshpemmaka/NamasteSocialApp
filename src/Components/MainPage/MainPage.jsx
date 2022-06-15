@@ -8,18 +8,23 @@ const MainPage = () => {
 	const {allPosts} = useSelector((store) => store.post);
 	const dispatch = useDispatch();
 	const [inputText, setinputText] = useState("");
-
+	const {
+		user: {profilePic},
+	} = JSON.parse(localStorage?.getItem("social-userSession"));
 	const postHandler = () => {
 		dispatch(adduserPost({content: inputText}));
 		setinputText("");
 	};
+
 	return (
 		<div className='mainpage-container'>
 			<label className='mainpage-heading'>Namaste</label>
 			<div className='user-input-component'>
-				<div className='user-input-icon'>
-					<i className='fas fa-user-circle'></i>
-				</div>
+				<img
+					src={profilePic}
+					alt='user-image'
+					className='user-image-response user-input-icon'
+				/>
 				<div className='user-input'>
 					<textarea
 						type='text'
