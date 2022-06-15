@@ -15,6 +15,9 @@
 		padding: 1rem 1rem;
 		border-radius: 0.625rem;
 		margin-bottom: 2rem;
+		.user-image-response {
+			height: 7rem;
+		}
 		.user-input-icon {
 			font-size: 5rem;
 			padding: 1rem 1rem;
@@ -72,6 +75,9 @@
 		.user-input-component {
 			.user-input-icon {
 				padding: 0rem;
+			}
+			.user-image-response{
+				display: none;
 			}
 		}
 	}

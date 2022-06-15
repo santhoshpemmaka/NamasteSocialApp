@@ -38,20 +38,7 @@
 		background-color: #ede065;
 		border-radius: 0.625rem;
 	}
-	.navbar-button {
-		padding: 1rem 0;
-		font-size: 2rem;
-		margin: 1.5rem 0;
-		background-color: var(--primary-color);
-		color: var(--complimentary-text-color);
-		font-weight: bold;
-		border: 2px solid var(--border-color);
-		border-radius: 1rem;
-		cursor: pointer;
-		&:hover {
-			background-color: var(--dark-primary-color);
-		}
-	}
+	
 }
 
 @media only screen and (max-width: 768px){
