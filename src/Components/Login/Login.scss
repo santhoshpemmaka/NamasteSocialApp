@@ -1,6 +1,7 @@
 .login-container {
 	grid-area: main;
 	width: 100%;
+	position: relative;
 	.login-component {
 		display: flex;
 		flex-direction: column;
@@ -99,5 +100,11 @@
 		.login-text > a {
 			color: inherit;
 		}
+	}
+	.loader-dots {
+		position: absolute;
+		top: 20%;
+		left: 40%;
+		transform: translate(50%, 50%);
 	}
 }

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate, useLocation} from "react-router-dom";
+import {ThreeDots} from "react-loader-spinner";
 import "./SignUp.scss";
 import {signUpUser} from "../../Features/Auth/Auth";
 import validator from "validator";
@@ -11,6 +12,7 @@ const SignUp = () => {
 	const navigation = useNavigate();
 	const location = useLocation();
 	const [signupMessage, setsignupMessage] = useState(false);
+	const [showLoader, setshowLoader] = useState(false);
 	const [signupDetails, setsignupDetails] = useState({
 		firstName: "",
 		lastName: "",
@@ -32,6 +34,7 @@ const SignUp = () => {
 			firstName !== "" &&
 			lastName !== ""
 		) {
+			setshowLoader((prev) => !prev);
 			dispatch(signUpUser(signupDetails));
 		}
 		setsignupMessage((prev) => !prev);
@@ -147,6 +150,11 @@ const SignUp = () => {
 				</div>
 			</div>
 			<div className='spacer-3rem'></div>
+			{showLoader && (
+				<div className='loader-dots'>
+					<ThreeDots color='#ff3f6c' height={100} width={100} timeout={5000} />
+				</div>
+			)}
 		</div>
 	);
 };

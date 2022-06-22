@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Link, useNavigate, useLocation} from "react-router-dom";
+import {ThreeDots} from "react-loader-spinner";
 import "./Login.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {loginUser} from "../../Features/Auth/Auth";
@@ -19,6 +20,7 @@ const Login = () => {
 	const [validationFlag, setvalidationFlag] = useState(false);
 	const [loginMessage, setloginMessage] = useState(false);
 	const [testFalg, settestFalg] = useState(false);
+	const [showLoader, setshowLoader] = useState(false);
 	if (userDetails.token) {
 		setTimeout(() => {
 			navigation(location?.state?.from?.pathname || "/home", {replace: true});
@@ -32,6 +34,7 @@ const Login = () => {
 				loginDetails.password != "" &&
 				testFalg
 			) {
+				setshowLoader((prev) => !prev);
 				dispatch(loginUser(loginDetails));
 			}
 		})();
@@ -131,6 +134,16 @@ const Login = () => {
 						</label>
 					</div>
 				</div>
+				{showLoader && (
+					<div className='loader-dots'>
+						<ThreeDots
+							color='#ff3f6c'
+							height={100}
+							width={100}
+							timeout={5000}
+						/>
+					</div>
+				)}
 			</div>
 		</>
 	);
