@@ -1,6 +1,7 @@
 .login-container {
 	grid-area: main;
 	width: 100%;
+	position: relative;
 	.login-component {
 		display: flex;
 		flex-direction: column;
@@ -71,6 +72,13 @@
 			background-color: var(--primary-color);
 			color: var(--complimentary-text-color);
 		}
+		.login-message {
+			font-size: 1.4rem;
+			padding: 0.5rem 0;
+			display: block;
+			text-align: center;
+			color: red;
+		}
 		.login-btn {
 			background-color: var(--primary-color);
 			border: none;
@@ -92,5 +100,11 @@
 		.login-text > a {
 			color: inherit;
 		}
+	}
+	.loader-dots {
+		position: absolute;
+		top: 20%;
+		left: 40%;
+		transform: translate(50%, 50%);
 	}
 }

@@ -10,6 +10,7 @@ import {
 	BookContainer,
 	ExploreContainer,
 	ProfileContainer,
+	ErrorPage,
 } from "./Components";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
@@ -63,6 +64,8 @@ function App() {
 					/>
 					<Route path='/login' element={<Login />} />
 					<Route path='/signup' element={<SignUp />} />
+					<Route path='*' element={<ErrorPage />} />
+					<Route path='/error' element={<ErrorPage />} />
 				</Routes>
 			</Router>
 		</div>

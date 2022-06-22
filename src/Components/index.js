@@ -5,6 +5,7 @@ import SignUp from "./SignUp/SignUp";
 import BookContainer from "./BookMark/BookContainer";
 import ExploreContainer from "./Explore/ExploreContainer";
 import ProfileContainer from "./Profile/ProfileContainer";
+import ErrorPage from "./ErrorPage/ErrorPage";
 
 export {
 	HomeLandingpage,
@@ -14,4 +15,5 @@ export {
 	BookContainer,
 	ExploreContainer,
 	ProfileContainer,
+	ErrorPage,
 };

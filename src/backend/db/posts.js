@@ -192,7 +192,7 @@ export const posts = [
 	},
 	{
 		_id: uuid(),
-		content: "What is first line write in javascript",
+		content: "What is first line write in programming",
 		likes: {
 			likeCount: 0,
 			likedBy: [],

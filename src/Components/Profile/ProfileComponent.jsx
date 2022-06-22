@@ -30,7 +30,6 @@ const ProfileComponent = () => {
 		dispatch(updateUser(userFrom));
 		editHandler();
 	};
-	console.log(userFrom);
 	return (
 		<div className='profile-component'>
 			<label className='profile-page-heading'>Namaste</label>

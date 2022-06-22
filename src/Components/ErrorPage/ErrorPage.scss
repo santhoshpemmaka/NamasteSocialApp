@@ -1,0 +1,15 @@
+.ErrorPage-container {
+	width: 100%;
+	grid-area: main;
+	.ErrorPage-response {
+		display: flex;
+		width: 85%;
+		margin: 1rem auto;
+		height: 45rem;
+        cursor: pointer;
+        img{
+            width: 100%;
+            height: auto;
+        }
+	}
+}
