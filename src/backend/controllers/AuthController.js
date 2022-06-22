@@ -1,6 +1,7 @@
-import { v4 as uuid } from "uuid";
-import { Response } from "miragejs";
-import { formatDate } from "../utils/authUtils";
+import {avatar1} from "../../Assests/AvatarImages";
+import {v4 as uuid} from "uuid";
+import {Response} from "miragejs";
+import {formatDate} from "../utils/authUtils";
 const sign = require("jwt-encode");
 
 /**
@@ -15,47 +16,48 @@ const sign = require("jwt-encode");
  * */
 
 export const signupHandler = function (schema, request) {
-  const { username, password, ...rest } = JSON.parse(request.requestBody);
-  try {
-    // check if username already exists
-    const foundUser = schema.users.findBy({ username: username });
-    if (foundUser) {
-      return new Response(
-        422,
-        {},
-        {
-          errors: ["Unprocessable Entity. Username Already Exists."],
-        }
-      );
-    }
-    const _id = uuid();
+	const {username, password, ...rest} = JSON.parse(request.requestBody);
+	try {
+		// check if username already exists
+		const foundUser = schema.users.findBy({username: username});
+		if (foundUser) {
+			return new Response(
+				422,
+				{},
+				{
+					errors: ["Unprocessable Entity. Username Already Exists."],
+				}
+			);
+		}
+		const _id = uuid();
 
-    const newUser = {
-      _id,
-      createdAt: formatDate(),
-      updatedAt: formatDate(),
-      username,
-      password,
-      ...rest,
-      followers: [],
-      following: [],
-      bookmarks: [],
-    };
-    const createdUser = schema.users.create(newUser);
-    const encodedToken = sign(
-      { _id, username },
-      process.env.REACT_APP_JWT_SECRET
-    );
-    return new Response(201, {}, { createdUser, encodedToken });
-  } catch (error) {
-    return new Response(
-      500,
-      {},
-      {
-        error,
-      }
-    );
-  }
+		const newUser = {
+			_id,
+			createdAt: formatDate(),
+			updatedAt: formatDate(),
+			username,
+			password,
+			...rest,
+			profilePic: avatar1,
+			followers: [],
+			following: [],
+			bookmarks: [],
+		};
+		const createdUser = schema.users.create(newUser);
+		const encodedToken = sign(
+			{_id, username},
+			process.env.REACT_APP_JWT_SECRET
+		);
+		return new Response(201, {}, {createdUser, encodedToken});
+	} catch (error) {
+		return new Response(
+			500,
+			{},
+			{
+				error,
+			}
+		);
+	}
 };
 
 /**
@@ -65,7 +67,7 @@ export const signupHandler = function (schema, request) {
  * */
 
 export const loginHandler = function (schema, request) {
-  const { username, password } = JSON.parse(request.requestBody);
+	const {username, password} = JSON.parse(request.requestBody);
 	try {
 		const foundUser = schema.users.findBy({username: username});
 		if (!foundUser) {

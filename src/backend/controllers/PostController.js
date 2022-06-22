@@ -78,7 +78,7 @@ export const createPostHandler = function (schema, request) {
 			);
 		}
 		const {postData} = JSON.parse(request.requestBody);
-		const post = {
+		let post = {
 			_id: uuid(),
 			...postData,
 			likes: {
@@ -253,38 +253,42 @@ export const dislikePostHandler = function (schema, request) {
 /**
  * This handler handles deleting a post in the db.
  * send DELETE Request at /api/user/posts/:postId
- * */export const deletePostHandler = function (schema, request) {
-  const user = requiresAuth.call(this, request);
-  try {
-    if (!user) {
-      return new Response(
-        404,
-        {},
-        {
-          errors: ["The username you entered is not Registered. Not Found error"],
-        }
-      );
-    }
-    const postId = request.params.postId;
-    let post = schema.posts.findBy({ _id: postId }).attrs;
-    if (post.username !== user.username) {
-      return new Response(
-        400,
-        {},
-        {
-          errors: ["Cannot delete a Post doesn't belong to the logged in User."],
-        }
-      );
-    }
-    this.db.posts.remove({ _id: postId });
-    return new Response(201, {}, { posts: this.db.posts });
-  } catch (error) {
-    return new Response(
-      500,
-      {},
-      {
-        error,
-      }
-    );
-  }
+ * */ export const deletePostHandler = function (schema, request) {
+	const user = requiresAuth.call(this, request);
+	try {
+		if (!user) {
+			return new Response(
+				404,
+				{},
+				{
+					errors: [
+						"The username you entered is not Registered. Not Found error",
+					],
+				}
+			);
+		}
+		const postId = request.params.postId;
+		let post = schema.posts.findBy({_id: postId}).attrs;
+		if (post.username !== user.username) {
+			return new Response(
+				400,
+				{},
+				{
+					errors: [
+						"Cannot delete a Post doesn't belong to the logged in User.",
+					],
+				}
+			);
+		}
+		this.db.posts.remove({_id: postId});
+		return new Response(201, {}, {posts: this.db.posts});
+	} catch (error) {
+		return new Response(
+			500,
+			{},
+			{
+				error,
+			}
+		);
+	}
 };

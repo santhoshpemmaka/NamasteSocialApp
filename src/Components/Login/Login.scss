@@ -71,6 +71,13 @@
 			background-color: var(--primary-color);
 			color: var(--complimentary-text-color);
 		}
+		.login-message {
+			font-size: 1.4rem;
+			padding: 0.5rem 0;
+			display: block;
+			text-align: center;
+			color: red;
+		}
 		.login-btn {
 			background-color: var(--primary-color);
 			border: none;

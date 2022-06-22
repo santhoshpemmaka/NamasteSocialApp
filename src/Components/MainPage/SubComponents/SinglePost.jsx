@@ -23,15 +23,14 @@ const SinglePost = ({post}) => {
 	const [showAllcomments, setshowAllcomments] = useState(false);
 
 	useEffect(() => {
-		setuserInfo(allUsers.find((user) => user.username === post.username));
+		setuserInfo(allUsers.find((user) => user?.username === post?.username));
 	}, [post, allUsers]);
 
 	useEffect(() => {
 		setcommentUserInfo(
-			allUsers.find((commentUser) => commentUser.username === user.username)
+			allUsers.find((commentUser) => commentUser?.username === user?.username)
 		);
 	}, [user]);
-
 	const isLiked = post?.likes?.likedBy?.some(
 		(like) => like.username === user.username
 	);
@@ -89,7 +88,6 @@ const SinglePost = ({post}) => {
 			})
 		);
 	};
-
 	return (
 		<div className='single-post-container'>
 			<div className='single-post-header'>
@@ -101,10 +99,12 @@ const SinglePost = ({post}) => {
 					/>
 					<div className='user-names-display'>
 						<h2 className='user-first-name'>{userInfo.firstName}</h2>
-						<h2 className='user-last-name'>@{userInfo.userHandler}</h2>
+						<h2 className='user-last-name'>
+							@{userInfo.userHandler ?? userInfo.lastName}
+						</h2>
 					</div>
 				</div>
-				{userInfo.username === commentUserInfo.username && (
+				{userInfo?.username === commentUserInfo?.username && (
 					<i
 						className='fas fa-ellipsis-v singlepost-ellipsis-icon'
 						onClick={() => ellipsisHandler()}></i>
@@ -186,7 +186,7 @@ const SinglePost = ({post}) => {
 			</div>
 			<div className='user-comment-container'>
 				<img
-					src={commentUserInfo.profilePic}
+					src={commentUserInfo?.profilePic}
 					alt='user-image'
 					className='user-comment-image-response'
 				/>
@@ -211,7 +211,7 @@ const SinglePost = ({post}) => {
 				<label
 					className='show-comments'
 					onClick={() => setshowAllcomments((prev) => !prev)}>
-					Hide all comments
+					Hide some comments
 				</label>
 			)}
 			{post && post.comments && showAllcomments

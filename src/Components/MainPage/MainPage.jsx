@@ -1,13 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import "./MainPage.scss";
 import SinglePost from "./SubComponents/SinglePost";
 import {adduserPost} from "../../Features/Post/Post";
 
 const MainPage = () => {
-	const {allPosts} = useSelector((store) => store.post);
+	const {
+		allPosts: {posts},
+	} = useSelector((store) => store.post);
 	const dispatch = useDispatch();
 	const [inputText, setinputText] = useState("");
+	const [allPosts, setallPosts] = useState([]);
 	const {
 		user: {profilePic},
 	} = JSON.parse(localStorage?.getItem("social-userSession"));
@@ -15,7 +18,15 @@ const MainPage = () => {
 		dispatch(adduserPost({content: inputText}));
 		setinputText("");
 	};
-
+	useEffect(() => {
+		if (posts) {
+			setallPosts(
+				[...posts]?.sort(
+					(a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+				)
+			);
+		}
+	}, [posts]);
 	return (
 		<div className='mainpage-container'>
 			<label className='mainpage-heading'>Namaste</label>
@@ -38,9 +49,9 @@ const MainPage = () => {
 					</button>
 				</div>
 			</div>
-			{allPosts &&
-				allPosts.posts &&
-				allPosts.posts.map((post) => <SinglePost key={post._id} post={post} />)}
+			{allPosts?.map((post) => (
+				<SinglePost key={post._id} post={post} />
+			))}
 		</div>
 	);
 };

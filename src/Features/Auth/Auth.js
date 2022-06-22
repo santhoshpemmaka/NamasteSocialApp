@@ -106,7 +106,7 @@ const authSlice = createSlice({
 			state.user = action.payload.createdUser;
 			state.email = action.payload.createdUser.userName;
 			localStorage.setItem(
-				"socail-userSesssion",
+				"social-userSession",
 				JSON.stringify({
 					user: state.user,
 					token: state.token,
