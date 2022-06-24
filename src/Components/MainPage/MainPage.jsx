@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import "./MainPage.scss";
 import SinglePost from "./SubComponents/SinglePost";
 import {adduserPost} from "../../Features/Post/Post";
+import {Link} from "react-router-dom";
 
 const MainPage = () => {
 	const {
@@ -15,8 +16,10 @@ const MainPage = () => {
 		user: {profilePic},
 	} = JSON.parse(localStorage?.getItem("social-userSession"));
 	const postHandler = () => {
-		dispatch(adduserPost({content: inputText}));
-		setinputText("");
+		if (inputText.length >= 1) {
+			dispatch(adduserPost({content: inputText}));
+			setinputText("");
+		}
 	};
 	useEffect(() => {
 		if (posts) {
@@ -31,11 +34,13 @@ const MainPage = () => {
 		<div className='mainpage-container'>
 			<label className='mainpage-heading'>Namaste</label>
 			<div className='user-input-component'>
-				<img
-					src={profilePic}
-					alt='user-image'
-					className='user-image-response user-input-icon'
-				/>
+				<Link to='/profile'>
+					<img
+						src={profilePic}
+						alt='user-image'
+						className='user-image-response user-input-icon'
+					/>
+				</Link>
 				<div className='user-input'>
 					<textarea
 						type='text'
@@ -44,7 +49,10 @@ const MainPage = () => {
 						value={inputText}
 						onChange={(e) => setinputText(e.target.value)}
 					/>
-					<button className='user-input-btn' onClick={() => postHandler()}>
+					<button
+						className='user-input-btn'
+						style={{cursor: inputText.length >= 1 ? "pointer" : "none"}}
+						onClick={() => postHandler()}>
 						Post
 					</button>
 				</div>
